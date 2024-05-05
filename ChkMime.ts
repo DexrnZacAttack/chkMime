@@ -26,15 +26,26 @@ import * as fileType from 'file-type';
 
 const folder = process.argv[2];
 
+if (process.argv[2] === "" || !process.argv[2]) {
+    console.log("Usage: chkMime.ts {folder}");
+    process.exit();
+}
+
 async function read() {
     // create dir
     try { await fs.mkdirSync("./chkMime"); } catch {}
     // read user specified directory
     fs.readdir(folder, (err, files) => {
+        if (!files) {
+            throw new Error("Failed to read folder... do we have permissions? does it exist?");
+        }
+        if (files.length === 0) {
+            throw new Error("No files were found in the specified folder.");
+        }
         // for each file in directory
         files.forEach(async element => {
             /** holds "full" file path */
-            var file = `${"./" + folder + "/" + element}`; 
+            var file = folder + "/" + element; 
             /** buffer of said file */
             var fileBuffer = fs.readFileSync(file);
             /** the file type (FileTypeResult), if fileTypeFromBuffer returns undefined then we set a default one. */
