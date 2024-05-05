@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "@types/node": "^20.12.7"
+  },
+  "dependencies": {
+    "file-type": "^19.0.0",
+    "mime-types": "^2.1.35",
+    "ts": "^0.2.2",
+    "typescript": "^5.4.5"
+  }
+}
